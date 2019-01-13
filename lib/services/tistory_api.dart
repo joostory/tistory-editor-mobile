@@ -16,7 +16,7 @@ class TistoryApi {
         '?access_token=$_auth'
         '&output=json';
     final response = await http.get(url, headers: {
-      'Content-Type': 'application.json'
+      'Content-Type': 'application/json'
     });
     if (response.statusCode != 200) {
       throw Exception();
@@ -32,7 +32,7 @@ class TistoryApi {
         '?access_token=$_auth'
         '&output=json';
     final response = await http.get(url, headers: {
-      'Content-Type': 'application.json'
+      'Content-Type': 'application/json'
     });
     if (response.statusCode != 200) {
       throw Exception();
@@ -56,7 +56,7 @@ class TistoryApi {
         '&output=json'
         '&blogName=$blogName';
     final response = await http.get(url, headers: {
-      'Content-Type': 'application.json'
+      'Content-Type': 'application/json'
     });
     if (response.statusCode != 200) {
       throw Exception();
@@ -79,7 +79,7 @@ class TistoryApi {
         '&count=30'
         '&page=$nextPage';
     final response = await http.get(url, headers: {
-      'Content-Type': 'application.json'
+      'Content-Type': 'application/json'
     });
     if (response.statusCode != 200) {
       throw Exception();
@@ -103,7 +103,7 @@ class TistoryApi {
     return postList;
   }
 
-  Future<SelectedPost> fetchPost(String blogName, Post post) async {
+  Future<PostDetail> fetchPost(String blogName, Post post) async {
     var url = '$BaseUrl'
         '/post/read'
         '?access_token=$_auth'
@@ -111,18 +111,47 @@ class TistoryApi {
         '&blogName=$blogName'
         '&postId=${post.id}';
     final response = await http.get(url, headers: {
-      'Content-Type': 'application.json'
+      'Content-Type': 'application/json'
     });
     if (response.statusCode != 200) {
       throw Exception();
     }
-    print(response.body);
+
     Map result = jsonDecode(response.body)['tistory']['item'];
     var tags = result.containsKey('tags') && result['tags'] is Map? result['tags']['tag'] : [];
-    return SelectedPost(
+    return PostDetail(
       post,
       result['content'],
       tags
     );
+  }
+
+  Future savePost(String blogName, PostDetail post, String visibility) async {
+    //
+    var url = '$BaseUrl'
+        '/post/modify'
+        '?access_token=$_auth'
+        '&output=json'
+        '&blogName=$blogName'
+        '&postId=${post.id}';
+
+    var body = {
+      'access_token': _auth,
+      'output': 'json',
+      'blogName': blogName,
+      'postId': post.id,
+      'title': post.title,
+      'content': post.content,
+      'visibility': visibility,
+      'category': post.categoryId,
+      'tag': post.tags.join(',')
+    };
+
+    final response = await http.post(url,
+      body: body
+    );
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
   }
 }

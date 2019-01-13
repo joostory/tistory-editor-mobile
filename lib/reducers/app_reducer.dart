@@ -14,7 +14,7 @@ class AppState {
   List<Blog> blogList;
   SelectedBlog selectedBlog;
   PostList postList;
-  SelectedPost selectedPost;
+  PostDetail selectedPost;
 
   AppState(
     this.auth,
@@ -22,7 +22,7 @@ class AppState {
     this.blogList,
     this.selectedBlog,
     this.postList,
-    this.selectedPost
+    this.selectedPost,
   );
 
   static newEmptyInstance() {
@@ -37,5 +37,5 @@ AppState appStateReducer(AppState state, action) => AppState(
   blogListReducer(state.blogList, action),
   selectedBlogReducer(state.selectedBlog, action),
   postListReducer(state.postList, action),
-  selectedPostReducer(state.selectedPost, action)
+  selectedPostReducer(state.selectedPost, action),
 );

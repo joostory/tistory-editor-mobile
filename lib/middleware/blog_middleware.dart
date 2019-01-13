@@ -23,9 +23,19 @@ Future loadPostContent(Store<AppState> store, LoadPostContentAction action, Next
   if (auth != null) {
     final tistoryApi = TistoryApi(auth);
     final blogName = store.state.selectedBlog.blog.name;
-    final post = store.state.selectedPost.post;
+    final post = store.state.selectedPost;
     var selectedPost = await tistoryApi.fetchPost(blogName, post);
 
     store.dispatch(ReceivePostContentAction(selectedPost));
+  }
+}
+
+Future savePostContent(Store<AppState> store, SavePostContentAction action, NextDispatcher next) async {
+  var auth = await getAuth();
+  if (auth != null) {
+    final tistoryApi = TistoryApi(auth);
+    final blogName = store.state.selectedBlog.blog.name;
+    await tistoryApi.savePost(blogName, action.post, action.visibility);
+    next(action);
   }
 }

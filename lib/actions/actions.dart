@@ -52,7 +52,14 @@ class SelectPostAction {
 class LoadPostContentAction {}
 
 class ReceivePostContentAction {
-  SelectedPost post;
+  PostDetail post;
 
   ReceivePostContentAction(this.post);
+}
+
+class SavePostContentAction {
+  PostDetail post;
+  String visibility;
+
+  SavePostContentAction(this.post, this.visibility);
 }

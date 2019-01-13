@@ -17,12 +17,18 @@ class Post {
   );
 }
 
-class SelectedPost {
-  Post post;
+class PostDetail extends Post {
   String content;
   List tags;
 
-  SelectedPost(this.post, this.content, this.tags);
+  PostDetail(
+    Post post,
+    String content,
+    List tags
+  ):
+    this.content = content,
+    this.tags = tags,
+    super(post.id, post.title, post.url, post.visibility, post.categoryId, post.date);
 }
 
 class PostList {

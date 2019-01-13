@@ -6,6 +6,7 @@ final postListReducer = combineReducers<PostList>([
   TypedReducer<PostList, SelectBlogAction>(_selectBlog),
   TypedReducer<PostList, ReceivePostListAndCategoriesAction>(_receiveInitialPostList),
   TypedReducer<PostList, ReceivePostListAction>(_receivePostList),
+  TypedReducer<PostList, SavePostContentAction>(_updatePost),
 ]);
 
 PostList _selectBlog(postList, action) {
@@ -22,4 +23,19 @@ PostList _receivePostList(postList, action) {
   nextPostList.list.addAll(action.list);
   nextPostList.hasNext = action.hasNext;
   return nextPostList;
+}
+
+PostList _updatePost(PostList postList, action) {
+  var index = postList.list.indexWhere((item) => item.id == action.post.id);
+  if (index >= 0) {
+    postList.list[index] = Post(
+        action.post.id,
+        action.post.title,
+        action.post.url,
+        action.visibility,
+        action.post.categoryId,
+        action.post.date
+    );
+  }
+  return postList;
 }

@@ -11,13 +11,13 @@ import 'package:tistory_editor/services/tistory_content.dart';
 class PostViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, SelectedPost>(
+    return StoreConnector<AppState, PostDetail>(
       converter: (store) => store.state.selectedPost,
       builder: (context, post) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.black,
-            title: post != null ? Text(post.post.title) : null,
+            title: post != null ? Text(post.title) : null,
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.edit),
@@ -40,19 +40,21 @@ class PostViewScreen extends StatelessWidget {
 class PostViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, SelectedPost>(
+    return StoreConnector<AppState, PostDetail>(
       converter: (store) => store.state.selectedPost,
       builder: (context, post) {
         if (post.content.length == 0) {
           return Text('로딩 중');
         }
 
+        var url = Uri.dataFromString(
+          convertAttachmentUrl(post.content),
+          mimeType: 'text/html',
+          encoding: Utf8Codec(allowMalformed: true),
+        ).toString();
+
         return WebviewScaffold(
-          url: Uri.dataFromString(
-            convertAttachmentUrl(post.content),
-            mimeType: 'text/html',
-            encoding: Utf8Codec(allowMalformed: true),
-          ).toString(),
+          url: url,
           allowFileURLs: false,
           withZoom: true,
           hidden: true,

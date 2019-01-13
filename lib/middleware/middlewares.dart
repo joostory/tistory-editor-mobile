@@ -11,6 +11,7 @@ List<Middleware<AppState>> createMiddleware() {
     TypedMiddleware<AppState, RemoveAuthAction>(disconnect),
     TypedMiddleware<AppState, LoadPostListAction>(loadPostList),
     TypedMiddleware<AppState, LoadPostContentAction>(loadPostContent),
+    TypedMiddleware<AppState, SavePostContentAction>(savePostContent),
   ];
 }
 
