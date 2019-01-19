@@ -1,4 +1,4 @@
-package com.tistory.tistoryeditor;
+package net.joostory.tistoryeditor;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
