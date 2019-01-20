@@ -30,7 +30,7 @@ class TistoryEditorApp extends StatelessWidget {
     return StoreProvider(
       store: _store,
       child: MaterialApp(
-        title: 'Tistory Editor',
+        title: 'Editor for Tistory',
         theme: ThemeData.light(),
         initialRoute: '/',
         routes: {

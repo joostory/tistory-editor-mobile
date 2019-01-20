@@ -49,6 +49,13 @@ class ReadyWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
+                'Editor for ',
+                style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold
+                )
+            ),
+            Text(
               'Tistory',
               style: TextStyle(
                 fontSize: 24.0,
@@ -56,13 +63,6 @@ class ReadyWidget extends StatelessWidget {
                 color: Color(0xfff1631b),
               ),
             ),
-            Text(
-              ' Editor',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold
-              )
-            )
           ]
         ),
         Row(
