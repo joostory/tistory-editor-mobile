@@ -48,7 +48,7 @@ class PostViewWidget extends StatelessWidget {
         }
 
         var url = Uri.dataFromString(
-          convertAttachmentUrl(post.content),
+          coverMobileHtml(convertAttachmentUrl(post.content)),
           mimeType: 'text/html',
           encoding: Utf8Codec(allowMalformed: true),
         ).toString();
