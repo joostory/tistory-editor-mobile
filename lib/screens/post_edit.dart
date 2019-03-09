@@ -70,14 +70,14 @@ class _PostEditWidgetState extends State<PostEditWidget> {
               child: Text('저장'),
               onPressed: () {
                 StoreProvider.of<AppState>(context).dispatch(SavePostContentAction(_post, '1'));
-                Navigator.pop(context);
+                Navigator.popUntil(context, ModalRoute.withName('/post/list'));
               },
             ),
             FlatButton(
               child: Text('발행'),
               onPressed: () {
                 StoreProvider.of<AppState>(context).dispatch(SavePostContentAction(_post, '3'));
-                Navigator.pop(context);
+                Navigator.popUntil(context, ModalRoute.withName('/post/list'));
               },
             ),
           ],
