@@ -36,7 +36,10 @@ class _PostEditWidgetState extends State<PostEditWidget> {
 
   _PostEditWidgetState(PostDetail post)
       : _post = post,
-        _markdown = html2md.convert(post.content),
+        _markdown = html2md.convert(post.content, styleOptions: {
+          'headingStyle': 'atx',
+          'hr': '---'
+        }),
         _contentController = TextEditingController(),
         _titleController = TextEditingController();
 
