@@ -54,6 +54,7 @@ class PostViewWidget extends StatelessWidget {
         ).toString();
 
         return WebviewScaffold(
+          userAgent: 'TistoryApp / Mobile Editor for Tistory',
           url: url,
           allowFileURLs: false,
           withZoom: true,

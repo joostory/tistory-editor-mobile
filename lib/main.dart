@@ -21,7 +21,7 @@ void main() {
 }
 
 class TistoryEditorApp extends StatelessWidget {
-  Store<AppState> _store;
+  final Store<AppState> _store;
 
   TistoryEditorApp(Store<AppState> store): _store = store;
 
